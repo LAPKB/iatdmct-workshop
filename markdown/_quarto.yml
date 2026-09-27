@@ -1,0 +1,17 @@
+# Everything in this repo renders to PDF. Each document declares its own
+# `format:` block so it can be copied out and rendered on its own; this file
+# just gives one command that builds the lot:
+#
+#     quarto render
+#
+# Building the PDFs needs a LaTeX toolchain once: `quarto install tinytex`.
+# `exercises/reproduce-target.qmd` and `reproduce-solution.qmd` additionally
+# run R (with knitr) to compute their numbers and figure.
+
+project:
+  type: default
+  render:
+    - cheatsheet.qmd
+    - exercises/task.qmd
+    - exercises/reproduce-target.qmd
+    - exercises/reproduce-solution.qmd

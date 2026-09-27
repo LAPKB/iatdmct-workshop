@@ -1,0 +1,197 @@
+---
+title: "Cheat sheet — Markdown, Quarto and equations"
+subtitle: "IATDMCT Congress · Introduction to Markdown"
+author: "Markus Hovd"
+date: today
+format:
+  pdf:
+    toc: true
+    toc-depth: 2
+    number-sections: true
+    geometry:
+      - margin=2cm
+engine: markdown
+---
+
+Keep this next to your keyboard. Everything here is written with the syntax it describes,
+so you can copy the source straight out of `cheatsheet.qmd`.
+
+# Markdown in one table
+
+| Purpose | Type this | Looks like |
+|--------------------|--------------------------------|---------------------------|
+| Heading | `## Section` | Section heading |
+| Bold / italic | `**bold**` / `*italic*` | **bold** / *italic* |
+| Strikethrough | `~~retracted~~` | ~~retracted~~ |
+| Inline code | `` `CL = D/AUC` `` | `CL = D/AUC` |
+| Bulleted list | `- item` | • item |
+| Numbered list | `1. item` | 1. item |
+| Task list | `- [x] done` | ☑ done |
+| Link | `[text](https://url)` | [text](https://quarto.org) |
+| Image | `![Caption](img.png)` | An image with caption |
+| Blockquote | `> quoted` | inset quote |
+| Footnote | `Text.[^a]` | superscript marker |
+| Line break | two trailing spaces | new line, same paragraph |
+| Divider | `---` | horizontal rule |
+| Escape | `\*` `\_` `\#` `\$` `\%` | literal characters |
+
+# Quarto extras
+
+| Purpose | Syntax |
+|-----------------------------------|--------------------------------------------------|
+| YAML header | `---` … `---` at the very top of the file |
+| Callout | `::: {.callout-note}` … `:::` (also `tip`, `warning`, `important`, `caution`) |
+| Columns | `:::: {.columns}` + `::: {.column width="50%"}` |
+| Table caption + label | `: Caption {#tbl-name}` |
+| Figure label | `![Caption](img.png){#fig-name}` |
+| Equation label | `$$ … $$ {#eq-name}` |
+| Cross-reference | `@sec-name`, `@fig-name`, `@tbl-name`, `@eq-name` |
+| Citation | `[@key]`, bibliography in the YAML |
+| Code chunk | ```` ```{r} ```` … ```` ``` ````, options via `#| label:` |
+| Chunk without running | ```` ```r ```` (no braces) |
+| Raw HTML fallback | `<span style="color:#b30000">text</span>` |
+
+# Equations — the essentials
+
+| Type this | You get | Type this | You get |
+|-----------------------|----------------|------------------------|-----------------|
+| `$x$` | inline $x$ | `$$x$$` | display equation |
+| `C_{max}` | $C_{max}$ | `C^2`, `x_i^2` | $C^2$, $x_i^2$ |
+| `\frac{a}{b}` | $\frac{a}{b}$ | `\dfrac{a}{b}` | $\dfrac{a}{b}$ (taller) |
+| `\sqrt{x}` | $\sqrt{x}$ | `\sqrt[3]{x}` | $\sqrt[3]{x}$ |
+| `\ln`, `\exp`, `\max` | $\ln,\ \exp,\ \max$ | `\log_{10}` | $\log_{10}$ |
+| `\sum_{i=1}^{n}` | $\sum_{i=1}^{n}$ | `\prod_{i=1}^{n}` | $\prod_{i=1}^{n}$ |
+| `\int_{0}^{\infty}` | $\int_{0}^{\infty}$ | `\lim_{x \to 0}` | $\lim_{x \to 0}$ |
+| `\alpha \beta \gamma` | $\alpha\ \beta\ \gamma$ | `\mu \sigma \lambda_z` | $\mu\ \sigma\ \lambda_z$ |
+| `\Delta \partial \nabla` | $\Delta\ \partial\ \nabla$ | `\infty \pm \approx` | $\infty\ \pm\ \approx$ |
+| `\times \cdot` | $\times,\ \cdot$ | `\geq \leq \neq` | $\geq\ \leq\ \neq$ |
+| `\left( \right)` | $\left( \right)$ | `\left\lvert \right\rvert` | $\left\lvert \right\rvert$ |
+| `\mathrm{mg/L}` | $\mathrm{mg/L}$ | `\text{steady state}` | $\text{steady state}$ |
+| `\ `, `\,`, `\quad` | space, thin space, wide space | `\hat{\theta}` | $\hat{\theta}$ |
+
+Multi-line building blocks:
+
+````markdown
+$$
+\begin{aligned}
+a &= b + c \\
+  &= d
+\end{aligned}
+\qquad
+\begin{cases}
+x & t \le T \\
+y & t > T
+\end{cases}
+\qquad
+\begin{pmatrix} a & b \\ c & d \end{pmatrix}
+$$
+````
+
+$$\begin{aligned}
+a &= b + c \\
+  &= d
+\end{aligned}
+\qquad
+\begin{cases}
+x & t \le T \\
+y & t > T
+\end{cases}
+\qquad
+\begin{pmatrix} a & b \\ c & d \end{pmatrix}$$
+
+Spacing, which is what makes an equation readable:
+
+| Type this | You get | What it does |
+|----------------------------|------------------------------|---------------------------|
+| `a\,b` | $a\,b$ | thin space |
+| `a\ b` | $a\ b$ | normal space (units) |
+| `a \quad b` | $a \quad b$ | wide space |
+| `\ln\!\left(x\right)` | $\ln\!\left(x\right)$ | pull together with `\!` |
+| `\operatorname{CL}` | $\operatorname{CL}$ | upright multi-letter label |
+
+# Equations you will type most often
+
+Copy the source column straight into a document. `$$ … $$` on one line is display math;
+`$ … $` is inline math.
+
+| Quantity | Source |
+|----------------------------|------------------------------------------------------------|
+| First-order decay | `$C(t) = C_0 e^{-k_e t}$` |
+| IV bolus, one compartment | `$$C(t) = \frac{D}{V_d}\,e^{-k_e t}$$` |
+| Elimination rate constant | `$$k_e = \frac{CL}{V_d}$$` |
+| Half-life | `$$t_{1/2} = \frac{\ln 2}{k_e}$$` |
+| Clearance | `$$CL = \frac{D}{AUC}$$` |
+| Volume of distribution | `$$V_d = \frac{D}{C_0}$$` |
+| AUC after an IV bolus | `$$AUC_{0 \to \infty} = \frac{C_0}{k_e} = \frac{D}{CL}$$` |
+| Trapezoidal AUC | `$$AUC_{0 \to t_n} = \sum_{i=1}^{n-1} \frac{C_i + C_{i+1}}{2}\,\Delta t_i$$` |
+| AUC extrapolated to infinity | `$$AUC_{0 \to \infty} = AUC_{0 \to t_{last}} + \frac{C_{last}}{k_e}$$` |
+| Mean residence time | `$$MRT = \frac{AUMC}{AUC}$$` |
+| Steady-state volume | `$$V_{ss} = MRT \cdot CL$$` |
+| Steady state, infusion | `$$C_{ss} = \frac{R_0}{CL}$$` |
+| Approach to steady state | `$$f_{ss}(t) = 1 - e^{-k_e t}$$` |
+| Loading dose | `$$D_L = \frac{C_{target}\,V_d}{S}$$` |
+| Trough at steady state | `$$C_{min,ss} = \frac{F D}{V_d}\,\frac{e^{-k_e \tau}}{1 - e^{-k_e \tau}}$$` |
+| Oral (Bateman) profile | `$$C(t) = \frac{F D k_a}{V_d (k_a - k_e)}\left(e^{-k_e t} - e^{-k_a t}\right)$$` |
+| Time to peak, oral | `$$t_{max} = \frac{\ln(k_a / k_e)}{k_a - k_e}$$` |
+| Peak after an oral dose | `$$C_{max} = \frac{F D}{V_d}\left(\frac{k_a}{k_a - k_e}\right)\left(e^{-k_e t_{max}} - e^{-k_a t_{max}}\right)$$` |
+| Bioavailability | `$$F = \frac{AUC_{oral}\,CL}{D_{oral}}$$` |
+| Cockcroft–Gault | `$$CL_{CR} = \frac{(140 - age)\,WT}{72\,S_{Cr}} \times 0.85\ \text{if female}$$` |
+| Dose adjustment | `$$D_{adj} = D_{std} \times \frac{CL_{CR,pt}}{CL_{CR,ref}}$$` |
+| Weight-based clearance | `$$CL_i = CL_{pop}\left(\frac{WT_i}{70}\right)^{0.75} e^{\eta_i}$$` |
+| Proportional residual error | `$$C_{ij} = C_{pred,ij}\,(1 + \varepsilon_{ij})$$` |
+| Between-subject variability | `$$CV\% = \sqrt{e^{\omega^2} - 1} \times 100\%$$` |
+| Michaelis–Menten | `$$-\frac{dC}{dt} = \frac{V_{max} C}{K_m + C}$$` |
+| Target attainment | `$$\frac{AUC_{24}}{MIC} \ge 400$$` |
+| Bayesian posterior | `$$p(\theta \mid y) \propto p(y \mid \theta)\,p(\theta)$$` |
+| MAP objective | `$$\hat{\theta} = \arg\max_{\theta}\; \sum_{j=1}^{m} \left[-\frac{\left(C_j^{obs} - C_j^{pred}(\theta)\right)^2}{2\sigma_j^{2}}\right]$$` |
+
+Rendered, so you can check your output at a glance:
+
+$$C(t) = \frac{D}{V_d}\,e^{-k_e t} \qquad
+t_{1/2} = \frac{\ln 2}{k_e} \qquad
+CL = \frac{D}{AUC}$$
+
+$$AUC_{0 \to t_n} = \sum_{i=1}^{n-1} \frac{C_i + C_{i+1}}{2}\,\Delta t_i \qquad
+C_{ss} = \frac{R_0}{CL} \qquad
+-\frac{dC}{dt} = \frac{V_{max} C}{K_m + C}$$
+
+# Punctuation that bites
+
+- `_` and `*` are formatting characters: write `AUC\_MIC`, not `AUC_MIC`.
+- `%` must be `\%` inside math if you ever export to PDF.
+- `$` in prose: currency is `\$5`, and an unmatched `$` swallows the rest of the paragraph.
+- Units belong in `\mathrm{}`. Multi-letter variables too: `\mathrm{AUC}`, `\mathrm{CL}`.
+- Functions are commands: `\ln(2)`, `\exp(x)`, `\max_i`.
+- Subscripts with more than one character need braces: `C_{max}`, `t_{1/2}`.
+- Display math wants its own paragraph — blank line before and after.
+- `\left` and `\right` are a pair; a missing one breaks the equation.
+- Prefer `\mu`, `\beta`, `\alpha` to typed Unicode when the document may become a PDF.
+
+# Command line
+
+```bash
+quarto preview file.qmd          # live preview while you write
+quarto render file.qmd           # build the file next to its source
+quarto render                    # build the whole project (uses _quarto.yml)
+quarto render file.qmd --to docx # a different output format
+quarto render file.qmd --to typst
+quarto check                     # is the toolchain complete?
+quarto install tinytex           # LaTeX for PDF output
+```
+
+Settings that matter for a talk:
+
+```yaml
+format:
+  beamer:
+    slide-level: 2             # `##` starts a slide; without it the deck collapses
+    aspectratio: 169
+    header-includes: |         # footer with page numbers
+      \setbeamertemplate{footline}{%
+        \hspace*{2ex}Your Name · IATDMCT Congress%
+        \hfill\insertframenumber{}/\inserttotalframenumber\hspace*{2ex}%
+      }
+```
+
+`{.smaller}`, `{.incremental}` and background colours are reveal.js features and are
+ignored in a PDF — fit a slide by cutting words.
