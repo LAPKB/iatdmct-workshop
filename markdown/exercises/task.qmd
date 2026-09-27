@@ -1,0 +1,65 @@
+---
+title: "Your turn — reproduce a document"
+subtitle: "IATDMCT Congress · Introduction to Markdown, Quarto and equations"
+author: "Markus Hovd"
+date: today
+format:
+  pdf:
+    toc: false
+    number-sections: true
+    geometry:
+      - margin=2.5cm
+---
+
+# The task
+
+Write a Quarto document that renders like **`reproduce-target.pdf`**. That file is the
+specification: open it, read it, and build a `.qmd` that produces the same thing.
+
+You are not being asked to reproduce it word for word. What matters is that every
+*mechanism* in it works — the numbering, the cross-references, and the numbers and figure
+that are computed rather than typed.
+
+The input file is **`data/patient-concentrations.csv`**, in this folder.
+
+# What the document must contain
+
+- [ ] A **YAML header** with `title`, `author`, `date: today` and PDF output
+- [ ] **Numbered sections** using `##` headings
+- [ ] A paragraph containing **bold**, *italic* and an **inline equation**
+- [ ] A **numbered display equation**, given a label, and referred to in the text with
+      `@eq-…` so that "Equation 1" appears
+- [ ] An **R code chunk** that reads the CSV and draws a figure
+- [ ] That figure **cross-referenced** with `@fig-…` so that "Figure 1" appears
+- [ ] A **table** with a caption and a label, referred to with `@tbl-…`
+
+# How to work
+
+Render after every change — that feedback loop *is* the skill:
+
+```bash
+quarto render my-report.qmd
+```
+
+If the render fails, read the error message. It names a file and a line. Nine times out of
+ten the cause is a YAML indent, an unmatched `$`, or a missing blank line.
+
+::: {.callout-tip}
+## Stuck?
+`reproduce-solution.pdf` is the same document with every code chunk shown, and
+`reproduce-solution.qmd` is its source. Try first, then compare — you will learn more from
+one failed render than from reading the answer.
+:::
+
+# What each part is really testing
+
+| Part | What it demonstrates |
+|--------------------------------|--------------------------------------------------|
+| `@eq-…` | That a numbered equation is *referenced*, never typed by hand |
+| The R chunk | That the document runs your code when it renders |
+| `@fig-…` | That a figure is numbered and linked automatically |
+| `@tbl-…` | The same for a table, with a caption |
+| The inline equation | That math works in the middle of a sentence, not just on its own line |
+
+If you can do all five, you can write a reproducible report. That is the whole point of the
+session.

@@ -1,0 +1,77 @@
+<!-- The worked solution: identical to reproduce-target.qmd except for
+     `echo: true`, which shows every code chunk. Regenerate both PDFs with
+     `quarto render` from the exercises/ folder. -->
+
+---
+title: "Vancomycin exposure — a mini report (solution)"
+author: "Your Name"
+date: today
+format:
+  pdf:
+    toc: false
+    number-sections: true
+execute:
+  echo: true
+---
+
+# Introduction
+
+A single intravenous dose of a drug that follows first-order elimination is described by
+@eq-decay, where $D$ is the dose, $V_d$ the volume of distribution and $k_e$ the
+elimination rate constant.
+
+$$C(t) = \frac{D}{V_d}\,e^{-k_e t}$$ {#eq-decay}
+
+# Methods
+
+Concentrations were read from `data/patient-concentrations.csv`. The elimination rate
+constant was estimated by least squares on the log-transformed concentrations, and the
+half-life followed from @eq-thalf.
+
+$$t_{1/2} = \frac{\ln 2}{k_e}$$ {#eq-thalf}
+
+```{r}
+#| label: fit
+
+conc <- read.csv("data/patient-concentrations.csv")
+
+fit <- lm(log(conc_mgL) ~ time_h, data = conc)
+c0 <- exp(unname(coef(fit)[1]))
+k_el <- -unname(coef(fit)[2])
+half_life <- log(2) / k_el
+```
+
+# Results
+
+@fig-conc shows the observed concentrations with the fitted curve. The fitted initial
+concentration is `r round(c0, 1)` mg/L and the estimated half-life is
+`r round(half_life, 1)` h.
+
+```{r}
+#| label: fig-conc
+#| fig-cap: "Observed concentrations and the fitted mono-exponential decay."
+#| fig-width: 6
+#| fig-height: 3.4
+
+tt <- seq(0, 12, length.out = 200)
+
+par(mar = c(4, 4.2, 1, 1), las = 1)
+plot(conc$time_h, conc$conc_mgL,
+  pch = 19, col = "#1b6ca8", cex = 1.1,
+  xlab = "Time after dose (h)", ylab = "Concentration (mg/L)"
+)
+lines(tt, c0 * exp(-k_el * tt), col = "#b3502a", lwd = 2)
+```
+
+# Summary
+
+| Quantity | Estimate |
+|--------------------|---------:|
+| $C_0$ (mg/L)       | `r round(c0, 1)` |
+| $k_e$ (h$^{-1}$)   | `r round(k_el, 3)` |
+| $t_{1/2}$ (h)      | `r round(half_life, 1)` |
+
+: Fitted parameters {#tbl-params}
+
+The fitted values in @tbl-params are computed at render time, so they cannot drift out of
+step with the figure in @fig-conc.
