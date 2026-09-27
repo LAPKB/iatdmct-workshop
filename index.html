@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Introduction to Markdown, Quarto and equations — IATDMCT 2026</title>
+<meta name="description" content="Materials for the IATDMCT 2026 workshop on Markdown, Quarto and equations: exercises, cheat sheet, data and Quarto sources.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #ffffff;
+    --fg: #1b1f24;
+    --muted: #5c6470;
+    --card: #f7f8fa;
+    --border: #e1e5ea;
+    --accent: #0b6b6b;
+    --accent-soft: #e6f2f2;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181d;
+      --fg: #e9ecf1;
+      --muted: #a3acba;
+      --card: #1e2127;
+      --border: #2f343d;
+      --accent: #5fd0cf;
+      --accent-soft: #1d2b2b;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 62rem; margin: 0 auto; padding: 3rem 1.25rem 4rem; }
+  header { border-bottom: 1px solid var(--border); padding-bottom: 1.75rem; margin-bottom: 2.5rem; }
+  .eyebrow {
+    margin: 0 0 .6rem;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 { margin: 0 0 .75rem; font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.2; }
+  .lede { margin: 0; max-width: 46rem; color: var(--muted); }
+  h2 {
+    margin: 3rem 0 1.25rem;
+    font-size: 1.05rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .card h3 { margin: 0 0 .5rem; font-size: 1.1rem; }
+  .tag {
+    display: inline-block;
+    align-self: flex-start;
+    margin-bottom: .8rem;
+    padding: .15rem .55rem;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+  }
+  .card p { margin: 0 0 1.1rem; color: var(--muted); font-size: .95rem; }
+  .links { list-style: none; margin: auto 0 0; padding: 0; font-size: .95rem; }
+  .links li { padding: .3rem 0; }
+  .links li + li { border-top: 1px solid var(--border); }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+  .links a { font-weight: 600; }
+  .links span { color: var(--muted); font-weight: 400; }
+  footer {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: .9rem;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">IATDMCT 2026 · Workshop</p>
+    <h1>Introduction to Markdown, Quarto and equations</h1>
+    <p class="lede">
+      Materials for the IATDMCT 2026 workshop. The exercises are below, along with the cheat
+      sheet, the data file and the Quarto sources.
+    </p>
+  </header>
+
+  <h2>Exercises</h2>
+  <div class="grid">
+
+    <article class="card">
+      <span class="tag">R code · Positron</span>
+      <h3>R code exercise</h3>
+      <p>
+        Do this one in Positron. Create an R project called <code>TryQuarto</code>, add a
+        <code>Theoph.qmd</code> document, and work through the tasks: chunk options, tidyverse
+        code and a linear model. The answers are in the reveal boxes.
+      </p>
+      <ul class="links">
+        <li><a href="r_code/exercises/R_code_Exercise.html">Open the exercise</a></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <span class="tag">Your turn</span>
+      <h3>Reproduce a document</h3>
+      <p>
+        Write a <code>.qmd</code> file that renders like the target PDF. It needs numbered
+        sections, a labelled equation, a figure and a table, each one referred to with a
+        cross-reference.
+      </p>
+      <ul class="links">
+        <li><a href="markdown/exercises/task.pdf">Task <span>(PDF)</span></a></li>
+        <li><a href="markdown/exercises/reproduce-target.pdf">Target document <span>(PDF)</span></a></li>
+        <li><a href="markdown/exercises/reproduce-solution.pdf">Solution with code <span>(PDF)</span></a></li>
+      </ul>
+    </article>
+
+  </div>
+
+  <h2>Reference</h2>
+  <div class="grid">
+
+    <article class="card">
+      <span class="tag">Cheat sheet</span>
+      <h3>Markdown, Quarto and equations</h3>
+      <p>
+        Markdown syntax, Quarto structure, chunk options, cross-references and equations.
+        Everything is written in the syntax it describes, so you can copy it.
+      </p>
+      <ul class="links">
+        <li><a href="markdown/cheatsheet.pdf">Open the cheat sheet <span>(PDF)</span></a></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <span class="tag">Data</span>
+      <h3>Patient concentrations</h3>
+      <p>
+        Input for the reproduce exercise: one intravenous vancomycin dose, with concentrations
+        measured over time.
+      </p>
+      <ul class="links">
+        <li><a href="markdown/exercises/data/patient-concentrations.csv">Download the CSV</a></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <span class="tag">Tools</span>
+      <h3>What you need</h3>
+      <p>
+        The R code exercise runs in Positron and uses the <code>tidyverse</code> and
+        <code>flextable</code> packages. Rendering a PDF also needs a LaTeX install.
+      </p>
+      <ul class="links">
+        <li><a href="https://positron.posit.co/">Positron</a></li>
+        <li><a href="https://www.r-project.org/">R</a></li>
+        <li><a href="https://quarto.org/">Quarto</a></li>
+      </ul>
+    </article>
+
+  </div>
+
+  <h2>Source files</h2>
+  <div class="grid">
+
+    <article class="card">
+      <span class="tag">Sources</span>
+      <h3>Quarto files</h3>
+      <p>
+        Each PDF is rendered from a <code>.qmd</code> file. Open one in Positron or RStudio and
+        render it with <code>quarto render</code>.
+      </p>
+      <ul class="links">
+        <li><a href="markdown/cheatsheet.qmd">cheatsheet.qmd</a></li>
+        <li><a href="markdown/exercises/task.qmd">exercises/task.qmd</a></li>
+        <li><a href="markdown/exercises/reproduce-target.qmd">exercises/reproduce-target.qmd</a></li>
+        <li><a href="markdown/exercises/reproduce-solution.qmd">exercises/reproduce-solution.qmd</a></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <span class="tag">Repository</span>
+      <h3>All files</h3>
+      <p>
+        The repository also has the figure script, the bibliography and the rendered output.
+      </p>
+      <ul class="links">
+        <li><a href="https://github.com/LAPKB/iatdmct-workshop">github.com/LAPKB/iatdmct-workshop</a></li>
+        <li><a href="README.md">README.md</a></li>
+      </ul>
+    </article>
+
+  </div>
+
+  <footer>
+    <p>IATDMCT 2026 · Introduction to Markdown, Quarto and equations</p>
+  </footer>
+
+</div>
+</body>
+</html>
