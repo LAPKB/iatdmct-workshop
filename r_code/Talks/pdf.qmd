@@ -1,0 +1,33 @@
+---
+title: "PDF Demo"
+format: pdf
+---
+
+```{r}
+library(tidyverse)
+library(flextable)
+```
+
+## Analysis
+
+Here we find the maximum theophylline concentration for each subject.
+
+
+```{r}
+Theoph |> 
+    group_by(Subject) |> 
+    summarize(cmax = max(conc)) |> 
+    arrange(as.numeric(as.character(Subject))) |> 
+    flextable()
+```
+
+## Plots
+
+Plot 
+
+
+```{r}
+Theoph |> 
+    ggplot(aes(x = Time, y = conc, group = Subject)) + 
+    geom_line()
+```

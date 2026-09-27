@@ -1,0 +1,43 @@
+---
+title: "HTML Demo"
+format: html
+---
+
+```{r}
+#| label: setup
+#| echo: true
+#| eval: true
+#| message: false
+library(tidyverse)
+library(flextable)
+```
+
+## Analysis
+
+Here we find the maximum theophylline concentration for each subject.
+
+
+```{r}
+Theoph |> 
+    dplyr::group_by(Subject) |> 
+    dplyr::summarize(cmax = max(conc)) |> 
+    arrange(as.numeric(as.character(Subject))) |> 
+    # knitr::kable()
+    flextable::flextable()
+```
+
+
+
+## Plots
+
+Plot 
+
+
+```{r}
+#| message: false
+library(plotly)
+
+Theoph |>
+    group_by(Subject) |>
+    plot_ly(x = ~Time, y = ~conc, type = "scatter", mode = "lines")
+```

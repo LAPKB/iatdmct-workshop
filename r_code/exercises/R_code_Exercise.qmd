@@ -1,0 +1,119 @@
+---
+title: "Quarto HTML Exercise"
+format: html
+---
+```{r}
+#| label: setup
+#| echo: false
+#| eval: true
+#| message: false
+library(tidyverse)
+library(flextable)
+```
+
+::: {.callout-note}
+You can click Preview in the upper left corner of the Editor window at any time.
+If you save the file after making changes and refresh your browser, you'll see the changes.
+:::
+
+1. Create a new R project in Positron. Put it in a folder called "TryQuarto".
+
+::: {.callout-tip title="Hint" collapse="true"}
+File -> New Folder from Template
+:::
+
+2. Add a new .qmd document called "Theoph.qmd"
+3. Using markdown, annotate your code with these level 2 headings: Analysis, Plot
+4. Before the Analysis section, insert an R code chunk to load the *tidyverse* metalibrary and *flextable* library. Install these packages using `install.packages()` if you don't have them already. Use the code chunk options to hide the code and messages from the output.
+
+::: {.callout-tip title="Hint" collapse="true"}
+```text
+#| label: setup
+#| echo: false
+#| eval: true
+#| message: false
+```
+:::
+
+5. In the analysis section, explain in markdown that you are going to first create a new data frame from `Theoph` called `trough`.
+6. Insert an R code chunk. In it use a *tidyverse* pipe if you can, to create `trough`. Label it "create-trough".
+
+::: {.callout-tip title="Hint" collapse="true"}
+
+* `#| label: create-trough`
+* Use `dplyr::group_by` to group by `Subject`
+* Create new variables with `dplyr::summarize` where *wt* and *dose* are the first records for *Wt* and *Dose*, *time* is the maximum of *Time*, and *conc* is the concentration which occurs at *time*.
+* Create new variables with `dplyr::mutate` where *id* is the numeric form of the character form of `Theoph$Subject` and *dosekg* is dose/wt.
+* Remove the grouping with `dplyr::ungroup`.
+* Use `dplyr::arrange` to sort by *id*
+
+:::
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Click to reveal an answer"
+
+trough <- 
+  Theoph |> 
+  group_by(Subject) |>
+  summarize(
+    wt = Wt[1],
+    dose = Dose[1],
+    time = max(Time),
+    conc = conc[which(Time == time)]
+  ) |>
+  mutate(
+    id = as.numeric(as.character(Subject)),
+    dosekg = dose / wt
+  ) |>
+  ungroup() |>
+  arrange(id)
+```
+
+    
+7. What happens if you add `#| echo: false` or `#| eval: false` to the code chunk?
+8. Add markdown to indicate you are examining how well dose predicts trough.
+8. In the next R chunk labeled "dose-lm" with echoing and evaluation, use the `stats::lm` function to create a linear regression called `lm_dose` of `trough$dose` as a predictor of `trough$conc`. Include a summary of `lm_dose` in your code chunk.
+
+::: {.callout-tip title="Hint" collapse="true"}
+
+- `?lm`
+- `lm_dose <- lm(...)`
+
+:::
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Click to reveal the answer"
+
+lm_dose <- lm(conc ~ dose, data = trough)
+summary(lm_dose)
+```
+
+9. Add more markdown to indicate you are now going to check if *dosekg* is a better predictor of the trough concentration.  **Bold** important parts of your text.
+10. Add another R chunk with **no** echoing labeled "dosekg-lm"  to create a linear regression called `lm_dosekg` of `trough$dosekg` as a predictor of `trough$conc`.
+11. Add an R chunk with both echo and evaluation to summarize `lm_dosekg`.
+12. After the level 2 "Plot" heading, visualize both regressions with `ggplot`, `geom_point`, and `geom_smooth`.
+
+::: {.callout-tip title="Hint" collapse="true"}
+
+`trough |> ggplot(aes( x = ? , y = ?)) + geom_point() + geom_smooth(method = "lm")`
+
+:::
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Click to reveal the answer"
+
+trough |> ggplot(aes( x = dose, y = conc)) + geom_point() + geom_smooth(method = "lm")
+
+```
+
+13. Write a conclusion in markdown after another level 2 heading.
+14. Find `Quarto: Render Document` in the Command Palette and click it. This will render your document to HTML. You can also use the keyboard shortcut `Ctrl + Shift + K` (Windows) or `Cmd + Shift + K` (Mac).
+
+
+
