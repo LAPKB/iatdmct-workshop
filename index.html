@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Introduction to Markdown, Quarto and equations — IATDMCT Congress</title>
-<meta name="description" content="Workshop materials for the IATDMCT Congress session on Markdown, Quarto and equations: hands-on exercises, cheat sheet, data and source files.">
+<title>Introduction to Markdown, Quarto and equations — IATDMCT 2026</title>
+<meta name="description" content="Materials for the IATDMCT 2026 workshop on Markdown, Quarto and equations: exercises, cheat sheet, data and Quarto sources.">
 <style>
   :root {
     color-scheme: light dark;
@@ -98,13 +98,11 @@
 <div class="wrap">
 
   <header>
-    <p class="eyebrow">IATDMCT Congress · Workshop</p>
+    <p class="eyebrow">IATDMCT 2026 · Workshop</p>
     <h1>Introduction to Markdown, Quarto and equations</h1>
     <p class="lede">
-      Reproducible documents for pharmacometrics: write a report whose numbers, figures and
-      tables are computed by the document itself. Everything for the session is below — start
-      with the exercise you were given, keep the cheat sheet next to your keyboard, and copy
-      the sources whenever you want to see how something was written.
+      Materials for the IATDMCT 2026 workshop. The exercises are below, along with the cheat
+      sheet, the data file and the Quarto sources.
     </p>
   </header>
 
@@ -115,9 +113,8 @@
       <span class="tag">Hands-on</span>
       <h3>Quarto in Positron</h3>
       <p>
-        Build a small Quarto report from the <code>Theoph</code> dataset: level-2 headings,
-        chunk options that hide code and messages, tidyverse pipes, and a linear model.
-        Answers are hidden behind the reveal boxes.
+        Create a Quarto document from the <code>Theoph</code> data. It covers level 2 headings,
+        chunk options, tidyverse code and a linear model. The answers are in the reveal boxes.
       </p>
       <ul class="links">
         <li><a href="Exercises/R_code_Exercise.html">Open the exercise</a></li>
@@ -128,14 +125,14 @@
       <span class="tag">Your turn</span>
       <h3>Reproduce a document</h3>
       <p>
-        Write a <code>.qmd</code> that renders like the target PDF: numbered sections, a
-        labelled equation, a computed figure and a table, each referred to by
-        <code>@eq-</code>, <code>@fig-</code> and <code>@tbl-</code> cross-references.
+        Write a <code>.qmd</code> file that renders like the target PDF. It needs numbered
+        sections, a labelled equation, a figure and a table, each one referred to with a
+        cross-reference.
       </p>
       <ul class="links">
-        <li><a href="markdown/exercises/task.pdf">Task</a></li>
-        <li><a href="markdown/exercises/reproduce-target.pdf">Target document <span>— the specification</span></a></li>
-        <li><a href="markdown/exercises/reproduce-solution.pdf">Solution <span>— code shown</span></a></li>
+        <li><a href="markdown/exercises/task.pdf">Task <span>(PDF)</span></a></li>
+        <li><a href="markdown/exercises/reproduce-target.pdf">Target document <span>(PDF)</span></a></li>
+        <li><a href="markdown/exercises/reproduce-solution.pdf">Solution with code <span>(PDF)</span></a></li>
       </ul>
     </article>
 
@@ -148,11 +145,11 @@
       <span class="tag">Cheat sheet</span>
       <h3>Markdown, Quarto and equations</h3>
       <p>
-        Two pages covering Markdown syntax, Quarto structure, chunk options, cross-references
-        and equation formatting — written in the syntax it describes, so it can be copied.
+        Markdown syntax, Quarto structure, chunk options, cross-references and equations.
+        Everything is written in the syntax it describes, so you can copy it.
       </p>
       <ul class="links">
-        <li><a href="markdown/cheatsheet.pdf">Open the cheat sheet</a></li>
+        <li><a href="markdown/cheatsheet.pdf">Open the cheat sheet <span>(PDF)</span></a></li>
       </ul>
     </article>
 
@@ -160,8 +157,8 @@
       <span class="tag">Data</span>
       <h3>Patient concentrations</h3>
       <p>
-        The input file for the reproduce-a-document exercise: one intravenous vancomycin dose
-        with a concentration–time series.
+        Input for the reproduce exercise: one intravenous vancomycin dose, with concentrations
+        measured over time.
       </p>
       <ul class="links">
         <li><a href="markdown/exercises/data/patient-concentrations.csv">Download the CSV</a></li>
@@ -174,11 +171,11 @@
   <div class="grid">
 
     <article class="card">
-      <span class="tag">Quarto sources</span>
-      <h3>Read or copy the sources</h3>
+      <span class="tag">Sources</span>
+      <h3>Quarto files</h3>
       <p>
-        Every PDF is rendered from a <code>.qmd</code> file. Open one in Positron or RStudio
-        and render it with <code>quarto render</code>.
+        Each PDF is rendered from a <code>.qmd</code> file. Open one in Positron or RStudio and
+        render it with <code>quarto render</code>.
       </p>
       <ul class="links">
         <li><a href="markdown/cheatsheet.qmd">cheatsheet.qmd</a></li>
@@ -190,10 +187,9 @@
 
     <article class="card">
       <span class="tag">Repository</span>
-      <h3>All materials</h3>
+      <h3>All files</h3>
       <p>
-        The workshop repository holds the sources, the figure script, the bibliography and the
-        rendered output.
+        The repository also has the figure script, the bibliography and the rendered output.
       </p>
       <ul class="links">
         <li><a href="https://github.com/LAPKB/iatdmct-workshop">github.com/LAPKB/iatdmct-workshop</a></li>
@@ -204,7 +200,7 @@
   </div>
 
   <footer>
-    <p>IATDMCT Congress · Introduction to Markdown, Quarto and equations · Markus Hovd</p>
+    <p>IATDMCT 2026 · Introduction to Markdown, Quarto and equations</p>
   </footer>
 
 </div>

@@ -1,6 +1,6 @@
 # iatdmct-workshop
 
-Materials for the IATDMCT Congress workshop *Introduction to Markdown, Quarto and equations*.
+Materials for the IATDMCT 2026 workshop *Introduction to Markdown, Quarto and equations*.
 
 **Workshop site:** <https://lapkb.github.io/iatdmct-workshop/>
 
