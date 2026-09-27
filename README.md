@@ -10,12 +10,18 @@ points straight at a file in this repository.
 
 | Material | File |
 |---|---|
-| Hands-on exercise — Quarto in Positron | `Exercises/R_code_Exercise.html` |
+| R code exercise (Positron) | `r_code/exercises/R_code_Exercise.html` |
 | Reproduce-a-document exercise | `markdown/exercises/task.pdf` |
 | Target document (the specification) | `markdown/exercises/reproduce-target.pdf` |
 | Solution (all code shown) | `markdown/exercises/reproduce-solution.pdf` |
 | Cheat sheet | `markdown/cheatsheet.pdf` |
 | Exercise data | `markdown/exercises/data/patient-concentrations.csv` |
+
+## Layout
+
+- `r_code/` — the R code exercise, rendered to HTML for Positron. Open
+  `r_code/exercises/R_code_Exercise.html` in a browser; it needs the `_files` folder next to it.
+- `markdown/` — the Quarto sources and their rendered PDFs.
 
 ## Building the PDFs
 
