@@ -1,0 +1,114 @@
+---
+title: "One file, two formats"
+subtitle: "Quarto parameters, interactive HTML and PowerPoint"
+format:
+  html:
+    embed-resources: true
+---
+
+## Start here
+
+**Goal:** write one Quarto file, render HTML and PowerPoint, and switch a plot on or off.
+
+A **parameter** is a named setting you choose when rendering. Here, `show_plot` controls whether a plot appears.
+
+You need Quarto, R, and the R packages **knitr**, **rmarkdown**, and **plotly** installed. The plot uses R's built-in `cars` dataset.
+
+If needed, install the packages once in the **R console**, before rendering:
+
+```r
+install.packages(c("knitr", "rmarkdown", "plotly"))
+```
+
+In Positron, create a plain text file named **`my-report.qmd`**. Use the Source editor to enter the code in steps 1 and 2.
+
+## 1. Add the header
+
+Put this at the very top of `my-report.qmd`, including both `---` lines:
+
+```yaml
+---
+title: "My first parameterized report"
+format:
+  html:
+    embed-resources: true
+  pptx: default
+params:
+  show_plot: true
+execute:
+  echo: false
+---
+```
+
+Keep the indentation. `true` shows the plot; `false` hides it. Embedded resources make the HTML easy to share as one file.
+
+## 2. Add the content
+
+Below the header, add this text and R chunk, including the backticks:
+
+````markdown
+## My plot
+
+Stopping distance and speed from R's cars dataset.
+
+```{{r}}
+if (params$show_plot) {
+  if (knitr::is_html_output()) {
+    p <- plotly::plot_ly(cars, x = ~speed, y = ~dist,
+                         type = "scatter", mode = "markers")
+    plotly::layout(p,
+                   xaxis = list(title = "Speed (mph)"),
+                   yaxis = list(title = "Stopping distance (ft)"))
+  } else {
+    plot(cars$speed, cars$dist,
+         xlab = "Speed (mph)",
+         ylab = "Stopping distance (ft)",
+         pch = 19)
+  }
+}
+```
+````
+
+`params$show_plot` reads the setting. `if (...)` runs the plotting code only when it is true. `echo: false` hides the code in the output.
+
+`knitr::is_html_output()` checks the output format. For HTML, it creates an interactive **Plotly** plot. For PowerPoint, the `else` branch draws the same data with R's `plot()`, which Quarto inserts as a static image.
+
+## 3. Render both formats
+
+Save the file. Open Positron's **Terminal** in the folder containing `my-report.qmd` and run these commands one at a time:
+
+```bash
+quarto render my-report.qmd --to html
+quarto render my-report.qmd --to pptx
+```
+
+Open **`my-report.html`** in a browser: hover over points to see their values and drag to zoom. Double-click the plot to reset the view.
+
+Open **`my-report.pptx`** in PowerPoint: the plot is a regular image, with no hover or zoom controls.
+
+The same `##` heading becomes a section in HTML and a slide heading in PowerPoint. Run these commands in the Terminal, not the R console.
+
+## 4. Hide the plot
+
+In the header, change `show_plot: true` to **`show_plot: false`**. Save and rerun both commands. Reopen the outputs: the text stays, but the plot disappears.
+
+You can also override the setting for one render without editing the file:
+
+```bash
+quarto render my-report.qmd --to html -P show_plot:true
+quarto render my-report.qmd --to pptx -P show_plot:true
+```
+
+These commands bring the plot back, even with `false` saved in the header. Each render replaces the corresponding output file.
+
+**Done when:** you have opened both formats and seen each with and without the plot.
+
+## Keep handy
+
+- Define the setting under `params:` in the header.
+- Read it in R with `params$show_plot`.
+- Choose the format with `--to html` or `--to pptx`.
+- Use `knitr::is_html_output()` to choose an interactive or static plot.
+- Override the setting with `-P show_plot:false`.
+
+References: [Quarto's parameter guide](https://quarto.org/docs/computations/parameters.html) and [Plotly scatter plots](https://plotly.com/r/line-and-scatter/).
